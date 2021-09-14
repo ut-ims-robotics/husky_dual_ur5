@@ -1,0 +1,7 @@
+[submodule "husky"]
+	path = husky
+	url = https://github.com/husky/husky
+[submodule "universal_robot"]
+	path = universal_robot
+	url = https://github.com/ros-industrial/universal_robot
+	branch = indigo-devel
