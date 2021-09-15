@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<launch>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find husky_dual_ur5_config)/config/husky_dual_ur5_sim.rviz" output="screen"/>
+</launch>

@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: husky_dual_ur5_description
+    relative_path: urdf/husky_dual_ur5.urdf.xacro
+    xacro_args: ""
+  SRDF:
+    relative_path: config/husky_robot.srdf
+  CONFIG:
+    author_name: blank blanksson
+    author_email: blank@blank.com
+    generated_timestamp: 1631698696

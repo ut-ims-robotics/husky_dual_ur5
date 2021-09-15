@@ -1,0 +1,16 @@
+<launch>
+  <!-- Initialize the duarl arms and put arm in stow position -->
+  <!-- <node pkg="robot_state_publisher" type="robot_state_publisher" name="robotiq_hands_l_hand_robot_state_publisher">
+    <param name="publish_frequency" type="double" value="50.0" />
+  </node> -->
+  <!-- <node name="left_gripper_js_relay" pkg="topic_tools" type="relay" args="robotiq_hands/left_hand/joint_states joint_states"/> -->
+  <!-- <node pkg="robot_state_publisher" type="robot_state_publisher" name="robotiq_hands_r_hand_robot_state_publisher">
+    <param name="publish_frequency" type="double" value="50.0" />
+  </node> -->
+  <!-- <node name="right_gripper_js_relay" pkg="topic_tools" type="relay" args="robotiq_hands/right_hand/joint_states joint_states"/> -->
+
+  <!-- <include file="$(find husky_gazebo)/launch/dual_ur5_init.launch" /> -->
+
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
+
+</launch>

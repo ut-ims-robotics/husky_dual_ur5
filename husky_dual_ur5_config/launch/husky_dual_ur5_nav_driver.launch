@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="laser_enabled" default="true"/>
+  <arg name="realsense_enabled" default="false"/>
+  <arg name="urdf_extras" default="$(optenv HUSKY_URDF_EXTRAS)"/>
+  <arg name="x" default="0.0"/>
+  <arg name="y" default="0.0"/>
+  <arg name="z" default="0.0"/>
+  <arg name="yaw" default="0.0"/>
+
+  <!-- Launch gazebo-->
+  <!-- <include file="$(find husky_gazebo)/launch/playpen.launch" /> -->
+
+  <!-- <include file="$(find husky_control)/launch/control.launch">
+    <arg name="multimaster" value="false"/>
+    <arg name="laser_enabled" value="$(arg laser_enabled)"/>
+    <arg name="realsense_enabled" default="$(arg realsense_enabled)"/>
+    <arg name="urdf_extras" value="$(arg urdf_extras)"/>
+  </include> -->
+
+  <!-- Load controller configuration -->
+  <rosparam command="load" file="$(find husky_control)/config/control.yaml" />
+
+  <!-- Spawn controllers -->
+  <node name="base_controller_spawner" pkg="controller_manager" type="spawner"
+        args="husky_joint_publisher husky_velocity_controller"/>
+
+  <!-- Start EKF for localization -->
+  <node pkg="robot_localization" type="ekf_localization_node" name="ekf_localization">
+    <rosparam command="load" file="$(find husky_control)/config/localization.yaml" />
+  </node>
+
+  <node pkg="interactive_marker_twist_server" type="marker_server" name="twist_marker_server" output="screen">
+    <param name="link_name" value="base_link" />
+  </node>
+
+  <!-- <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" /> -->
+
+  <node pkg="twist_mux" type="twist_mux" name="twist_mux">
+    <rosparam command="load" file="$(find husky_control)/config/twist_mux.yaml" />
+    <remap from="cmd_vel_out" to="husky_velocity_controller/cmd_vel"/>
+  </node>
+
+  <!-- Additional nodes for specific accessories -->
+  <group if="$(arg realsense_enabled)">
+    <include file="$(find husky_gazebo)/launch/realsense.launch" />
+  </group>
+
+  <!-- Spawn robot in gazebo -->
+  <!-- <node name="spawn_husky_model" pkg="gazebo_ros" type="spawn_model"
+      args="-x $(arg x)
+            -y $(arg y)
+            -z $(arg z)
+            -Y $(arg yaw)
+            -unpause
+            -urdf
+            -param robot_description
+            -model vaultbot
+            -gazebo_namespace gazebo
+            -J r_ur5_arm_shoulder_pan_joint -1.57 
+            -J r_ur5_arm_shoulder_lift_joint -0.1745 
+            -J r_ur5_arm_elbow_joint -2.79 
+            -J r_ur5_arm_wrist_1_joint -1.57 
+            -J r_ur5_arm_wrist_2_joint 0 
+            -J r_ur5_arm_wrist_3_joint 0" /> -->
+
+</launch>

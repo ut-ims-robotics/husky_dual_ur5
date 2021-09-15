@@ -1,0 +1,24 @@
+controller_list:
+  - name: fake_l_arm_controller
+    type: $(arg execution_type)
+    joints:
+      - l_ur5_arm_shoulder_pan_joint
+      - l_ur5_arm_shoulder_lift_joint
+      - l_ur5_arm_elbow_joint
+      - l_ur5_arm_wrist_1_joint
+      - l_ur5_arm_wrist_2_joint
+      - l_ur5_arm_wrist_3_joint
+  - name: fake_r_arm_controller
+    type: $(arg execution_type)
+    joints:
+      - r_ur5_arm_shoulder_pan_joint
+      - r_ur5_arm_shoulder_lift_joint
+      - r_ur5_arm_elbow_joint
+      - r_ur5_arm_wrist_1_joint
+      - r_ur5_arm_wrist_2_joint
+      - r_ur5_arm_wrist_3_joint
+initial:  # Define initial robot poses.
+  - group: l_arm
+    pose: l_arm_stow
+  - group: r_arm
+    pose: r_arm_stow

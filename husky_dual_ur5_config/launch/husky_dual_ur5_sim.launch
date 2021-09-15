@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Start gazebo -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find husky_dual_ur5_config)/worlds/clearpath_playpen.world"/>
+    <arg name="paused" value="true"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+
+  <!-- Load the URDF into the ROS parameter server -->
+  <param name="robot_description" command="$(find xacro)/xacro '$(find husky_dual_ur5_description)/urdf/husky_dual_ur5.urdf.xacro'"/>
+
+  <!-- Spawn robot in gazebo -->
+  <node name="spawn_husky_model" pkg="gazebo_ros" type="spawn_model"
+    args="-x 0.0
+          -y 0.0
+          -z 0.0
+          -Y 0.0
+          -unpause
+          -urdf
+          -param robot_description
+          -model vaultbot
+          -gazebo_namespace gazebo
+          -J r_ur5_arm_shoulder_pan_joint -1.57 
+          -J r_ur5_arm_shoulder_lift_joint -0.1745 
+          -J r_ur5_arm_elbow_joint -2.1
+          -J r_ur5_arm_wrist_1_joint -1.57 
+          -J r_ur5_arm_wrist_2_joint 0.0 
+          -J r_ur5_arm_wrist_3_joint 0.0 
+          -J l_ur5_arm_shoulder_pan_joint -1.57
+          -J l_ur5_arm_shoulder_lift_joint -0.1745
+          -J l_ur5_arm_elbow_joint -2.1
+          -J l_ur5_arm_wrist_1_joint -1.57
+          -J l_ur5_arm_wrist_2_joint 0.0
+          -J l_ur5_arm_wrist_3_joint 0.0"/>
+
+  <!-- Load the robot's controllers and drivers -->
+  <include file="$(find husky_dual_ur5_config)/launch/husky_dual_ur5_nav_driver.launch" />
+  <include file="$(find husky_dual_ur5_config)/launch/husky_dual_ur5_nav_controller.launch" />
+  <include file="$(find husky_dual_ur5_config)/launch/husky_dual_ur5_manip_driver.launch" />
+  <include file="$(find husky_dual_ur5_config)/launch/husky_dual_ur5_manip_controller.launch" />
+
+</launch>
