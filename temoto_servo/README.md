@@ -24,8 +24,7 @@ stop_controllers:
 strictness: 2"
 ```
 
-### Note: 
-The above command would fail, since the controller does not exist. Please refer to  Issues section at the end of the readme for further details.
+### Note: The above command would fail, since the controller does not exist. Please refer to  Issues section at the end of the readme for further details.
 
 Launch the servo node. This example uses commands from a SpaceNavigator joystick-like device:
 
