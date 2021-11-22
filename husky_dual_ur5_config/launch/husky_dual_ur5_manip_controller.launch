@@ -13,7 +13,9 @@
   <rosparam command="load" file="$(find husky_dual_ur5_config)/config/control_right_ur5.yaml" />
   <node name="left_arm_controller_spawner" pkg="controller_manager" type="spawner" args="l_arm_controller --shutdown-timeout 3"/>
   <node name="right_arm_controller_spawner" pkg="controller_manager" type="spawner" args="r_arm_controller --shutdown-timeout 3"/>
-
+  <node name="left_ros_control_controller_manager" pkg="controller_manager" type="controller_manager" respawn="false" output="screen" args="load l_joint_group_position_controller" />
+  <node name="right_ros_control_controller_manager" pkg="controller_manager" type="controller_manager" respawn="false" output="screen" args="load r_joint_group_position_controller" />
+  
 </launch>
 
 
