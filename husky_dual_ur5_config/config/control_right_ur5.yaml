@@ -20,3 +20,13 @@ r_arm_controller:
   stop_trajectory_duration: 0.5
   state_publish_rate:  25
   action_monitor_rate: 10
+
+r_joint_group_position_controller:
+  type: position_controllers/JointGroupPositionController
+  joints:
+     - r_ur5_arm_shoulder_pan_joint
+     - r_ur5_arm_shoulder_lift_joint
+     - r_ur5_arm_elbow_joint
+     - r_ur5_arm_wrist_1_joint
+     - r_ur5_arm_wrist_2_joint
+     - r_ur5_arm_wrist_3_joint
