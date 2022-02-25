@@ -7,6 +7,13 @@ Among the plethora of non-maintainable and consequently outdated dual UR5 Husky 
 * unfathomable amount of dependencies, such as pan-tilt unit or gripper device drivers
 
 ## Installation
+
+First install the dependencies:
+```bash
+sudo apt install gazebo11 ros-noetic-gazebo-ros ros-noetic-gazebo-ros-control ros-noetic-gazebo-plugins ros-noetic-lms1xx ros-noetic-robot-localization ros-noetic-interactive-marker-twist-server ros-noetic-twist-mux ros-noetic-map-server ros-noetic-amcl ros-noetic-move-base ros-noetic-joint-trajectory-controller ros-noetic-joint-state-controller ros-noetic-diff-drive-controller ros-noetic-dwa-local-planner ros-noetic-controller-manager
+```
+
+Then install this package and build it:
 ```bash
 cd <your-catkin-workspace>/src
 git clone --recursive https://github.com/ut-ims-robotics/husky_dual_ur5
